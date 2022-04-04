@@ -91,7 +91,6 @@ def bird(x, y, image):
 y = 200
 
 
-
 def process_sound(indata, outdata, frames, time, status):
     global y
     volume_norm = np.linalg.norm(indata)
