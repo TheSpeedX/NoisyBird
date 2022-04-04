@@ -49,7 +49,7 @@ To start contributing:
 2. If the Issue you want to solve is not present in open issue, Create an Issue.
 3. Comment on the issue you want to work on.
 4. Work on your Fork and test it.
-5. Send A PR
+5. Send A PR  
 (Optionally)  
 6. Add a GitHub Star to the project.
 7. Follow [TheSpeedX](https://github.com/TheSpeedX)
