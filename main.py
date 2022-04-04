@@ -89,18 +89,16 @@ def bird(x, y, image):
 
 
 y = 200
-max_volume = 0
+
 
 
 def process_sound(indata, outdata, frames, time, status):
-    global y, max_volume
+    global y
     volume_norm = np.linalg.norm(indata)
-    max_volume = max(max_volume, volume_norm)
     if volume_norm > 1:
         y -= 5
     else:
         y += 5
-    print(max_volume)
 
 
 def main():
