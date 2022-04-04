@@ -84,6 +84,7 @@ class Block:
         )
 
     def move(self, x, y):
+        self.passed = False
         self.x_block = x
         self.y_block = y
 
@@ -91,10 +92,11 @@ class Block:
         self.gap = gap
 
     def check_passed(self, bird: Bird):
-        return (
+        self.passed = (
             bird.x > self.x_block + self.block_width and
             bird.x < self.x_block + self.block_width + bird.img_width / 5
         )
+        return self.passed
 
     def check_collision(self, bird: Bird):
         return (
@@ -140,8 +142,11 @@ class NoisyBird:
     def reset_game():
         NoisyBird.bird = Bird(150, 200)
         NoisyBird.score_card = ScoreCard()
-        NoisyBird.block = Block(50, random.randint(
-            0, surfaceHeight / 2), NoisyBird.bird.img_height*5)
+        NoisyBird.block = Block(
+            50,
+            random.randint(0, surfaceHeight / 2),
+            NoisyBird.bird.img_height*5
+        )
 
     def replay_or_quit(self):
         for event in pygame.event.get(
@@ -189,8 +194,6 @@ class NoisyBird:
         # speed of blocks
         block_move = 3
 
-        score = 0
-
         # Game Loop
         while not self.game_over:
 
@@ -222,10 +225,10 @@ class NoisyBird:
 
             # detecting whether we are past the block or not in X
             if NoisyBird.block.check_passed(NoisyBird.bird):
-                score += 1
-                NoisyBird.score_card.update(score)
+                NoisyBird.score_card.score += 1
 
             pygame.display.update()
+            # NOTE: Higher the Tick, Faster the Game
             clock.tick(80)
 
 
