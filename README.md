@@ -32,6 +32,14 @@ This a simple Flappy Bird Game made in Python (PyGame).
 The bird gets energy from your voice.
 Play the game and let your voice be heard.
 
+## ⚡️ HOW TO RUN
+Install dependencies  
+`pip install -r requirements.txt`
+
+Run Game  
+`python main.py`
+
+
 ## 📈 Improvements welcomed
 
 - Make UI Better(Background, Pipes).
