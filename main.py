@@ -46,16 +46,43 @@ class Bird:
 class ScoreCard:
     def __init__(self):
         self.position = [3, 3]
+        self.highscorepos = [3,20]
         self.score = 0
         self.font = pygame.font.Font('freesansbold.ttf', 20)
+        self.load_highscore()
 
+    def __del__(self): self.save_highscore()
+    
+    def load_highscore(self):
+        #load high score
+        try:
+            with open('score/highscore.txt', 'r+') as f:
+                self.highscore = int(f.read())
+        except:
+            with open('score/highscore.txt', 'w') as f:
+                self.highscore = 0
+
+    def save_highscore(self):
+        with open('score/highscore.txt', 'w') as f:
+            f.write(str(self.highscore))
+
+    def add_score(self, value):
+        self.score += value
+        
+    def reset(self):
+        self.score = 0
+        
     def draw(self):
         # TODO: Show High Score Aswell
-        text = self.font.render(f'Score: {self.score}', True, white)
+        text = self.font.render(f'Current Score: {self.score}', True, white)
+        hstext = self.font.render(f'High Score: {self.highscore}', True, white)
         surface.blit(text, self.position)
+        surface.blit(hstext, self.highscorepos)
 
-    def update(self, score):
-        self.score = score
+    def update(self):
+        
+        if self.score > self.highscore:
+            self.highscore = self.score
 
 
 class Block:
@@ -141,7 +168,7 @@ class NoisyBird:
     @staticmethod
     def reset_game():
         NoisyBird.bird = Bird(150, 200)
-        NoisyBird.score_card = ScoreCard()
+        NoisyBird.score_card.reset()
         NoisyBird.block = Block(
             50,
             random.randint(0, surfaceHeight / 2),
@@ -225,9 +252,10 @@ class NoisyBird:
 
             # detecting whether we are past the block or not in X
             if NoisyBird.block.check_passed(NoisyBird.bird):
-                NoisyBird.score_card.score += 1
+                NoisyBird.score_card.add_score(1)
 
             pygame.display.update()
+            NoisyBird.score_card.update()
             # NOTE: Higher the Tick, Faster the Game
             clock.tick(80)
 
