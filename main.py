@@ -49,9 +49,8 @@ class ScoreCard:
         self.highscorepos = [3,20]
         self.score = 0
         self.font = pygame.font.Font('freesansbold.ttf', 20)
+        self.highscore=0
         self.load_highscore()
-
-    def __del__(self): self.save_highscore()
     
     def load_highscore(self):
         #load high score
@@ -83,6 +82,7 @@ class ScoreCard:
         
         if self.score > self.highscore:
             self.highscore = self.score
+            self.save_highscore()
 
 
 class Block:
@@ -180,7 +180,6 @@ class NoisyBird:
             [pygame.KEYDOWN, pygame.KEYUP, pygame.QUIT]
         ):
             if event.type == pygame.QUIT:
-                pygame.quit()
                 exit()
 
             elif event.type == pygame.KEYDOWN:
@@ -204,13 +203,13 @@ class NoisyBird:
         while self.replay_or_quit() is None:
             clock.tick()
         self.game_over = False
-        self.main()
+        self.play()
 
     def gameOver(self):
         NoisyBird.bird.die_sound.play()
         self.game_over_screen()
 
-    def main(self):
+    def play(self):
         NoisyBird.reset_game()
         print('Game Started')
         x_block = surfaceWidth
@@ -259,9 +258,11 @@ class NoisyBird:
             # NOTE: Higher the Tick, Faster the Game
             clock.tick(80)
 
+def main():
+    sd.Stream(callback=NoisyBird.process_sound).start()
+    game = NoisyBird()
+    game.play()
 
-sd.Stream(callback=NoisyBird.process_sound).start()
-game = NoisyBird()
-game.main()
-pygame.quit()
-exit()
+if __name__ == '__main__':
+    main()
+
