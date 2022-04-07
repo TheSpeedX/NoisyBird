@@ -53,7 +53,7 @@ class ScoreCard:
         self.load_highscore()
     
     def load_highscore(self):
-        #load high score
+        #load high score upon initializing game
         try:
             with open('score/highscore.txt', 'r+') as f:
                 self.highscore = int(f.read())
@@ -62,6 +62,7 @@ class ScoreCard:
                 self.highscore = 0
 
     def save_highscore(self):
+        #saves highscore to path file
         with open('score/highscore.txt', 'w') as f:
             f.write(str(self.highscore))
 
