@@ -46,34 +46,34 @@ class Bird:
 class ScoreCard:
     def __init__(self):
         self.position = [3, 3]
-        self.highscorepos = [3,20]
+        self.highscorepos = [3, 20]
         self.score = 0
         self.font = pygame.font.Font('freesansbold.ttf', 20)
-        self.highscore=0
+        self.highscore = 0
+        self.highscore_path = os.path.join('score', 'highscore.save')
         self.load_highscore()
-    
+
     def load_highscore(self):
-        #load high score upon initializing game
+        # load high score upon initializing game
         try:
-            with open(os.path.join('score', 'highscore.txt'), 'r+') as f:
+            with open(self.highscore_path, 'r+') as f:
                 self.highscore = int(f.read())
-        except:
-            with open(os.path.join('score', 'highscore.txt'), 'w') as f:
-                self.highscore = 0
+        except Exception:
+            self.highscore = 0
 
     def save_highscore(self):
-        #saves highscore to path file
-        with open(os.path.join('score', 'highscore.txt'), 'w') as f:
+        # saves highscore to path file
+        with open(self.highscore_path, 'w') as f:
             f.write(str(self.highscore))
 
     def add_score(self, value):
         self.score += value
-        
+
     def reset(self):
         self.score = 0
-        
+
     def draw(self):
-        #Shows Current and High scores
+        # Shows Current and High scores
         text = self.font.render(f'Current Score: {self.score}', True, white)
         hstext = self.font.render(f'High Score: {self.highscore}', True, white)
         surface.blit(text, self.position)
@@ -258,11 +258,12 @@ class NoisyBird:
             # NOTE: Higher the Tick, Faster the Game
             clock.tick(80)
 
+
 def main():
     sd.Stream(callback=NoisyBird.process_sound).start()
     game = NoisyBird()
     game.play()
 
+
 if __name__ == '__main__':
     main()
-

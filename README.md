@@ -27,19 +27,20 @@ A Voice Controlled Flappy Bird
 ## ⚡️ Introduction
 
 This a simple Flappy Bird Game made in Python (PyGame).
-The bird gets energy from your voice.
+The bird gets energy from your voice.  
 Play the game and let your voice be heard.
 
-![NoisyBird](images/Introduction.png)
-
+<div align="center">
+  <img alt="NoisyBird" src="images/Introduction.gif">
+</div>
 
 ## ⚡️ HOW TO RUN
+
 Install dependencies  
 `pip install -r requirements.txt`
 
 Run Game  
 `python main.py`
-
 
 ## 📈 Improvements welcomed
 
