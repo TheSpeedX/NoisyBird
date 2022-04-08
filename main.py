@@ -46,16 +46,43 @@ class Bird:
 class ScoreCard:
     def __init__(self):
         self.position = [3, 3]
+        self.highscorepos = [3,20]
         self.score = 0
         self.font = pygame.font.Font('freesansbold.ttf', 20)
+        self.highscore=0
+        self.load_highscore()
+    
+    def load_highscore(self):
+        #load high score upon initializing game
+        try:
+            with open(os.path.join('score', 'highscore.txt'), 'r+') as f:
+                self.highscore = int(f.read())
+        except:
+            with open(os.path.join('score', 'highscore.txt'), 'w') as f:
+                self.highscore = 0
 
+    def save_highscore(self):
+        #saves highscore to path file
+        with open(os.path.join('score', 'highscore.txt'), 'w') as f:
+            f.write(str(self.highscore))
+
+    def add_score(self, value):
+        self.score += value
+        
+    def reset(self):
+        self.score = 0
+        
     def draw(self):
-        # TODO: Show High Score Aswell
-        text = self.font.render(f'Score: {self.score}', True, white)
+        #Shows Current and High scores
+        text = self.font.render(f'Current Score: {self.score}', True, white)
+        hstext = self.font.render(f'High Score: {self.highscore}', True, white)
         surface.blit(text, self.position)
+        surface.blit(hstext, self.highscorepos)
 
-    def update(self, score):
-        self.score = score
+    def update(self):
+        if self.score > self.highscore:
+            self.highscore = self.score
+            self.save_highscore()
 
 
 class Block:
@@ -141,7 +168,7 @@ class NoisyBird:
     @staticmethod
     def reset_game():
         NoisyBird.bird = Bird(150, 200)
-        NoisyBird.score_card = ScoreCard()
+        NoisyBird.score_card.reset()
         NoisyBird.block = Block(
             50,
             random.randint(0, surfaceHeight / 2),
@@ -153,7 +180,6 @@ class NoisyBird:
             [pygame.KEYDOWN, pygame.KEYUP, pygame.QUIT]
         ):
             if event.type == pygame.QUIT:
-                pygame.quit()
                 exit()
 
             elif event.type == pygame.KEYDOWN:
@@ -177,13 +203,13 @@ class NoisyBird:
         while self.replay_or_quit() is None:
             clock.tick()
         self.game_over = False
-        self.main()
+        self.play()
 
     def gameOver(self):
         NoisyBird.bird.die_sound.play()
         self.game_over_screen()
 
-    def main(self):
+    def play(self):
         NoisyBird.reset_game()
         print('Game Started')
         x_block = surfaceWidth
@@ -225,15 +251,18 @@ class NoisyBird:
 
             # detecting whether we are past the block or not in X
             if NoisyBird.block.check_passed(NoisyBird.bird):
-                NoisyBird.score_card.score += 1
+                NoisyBird.score_card.add_score(1)
 
             pygame.display.update()
+            NoisyBird.score_card.update()
             # NOTE: Higher the Tick, Faster the Game
             clock.tick(80)
 
+def main():
+    sd.Stream(callback=NoisyBird.process_sound).start()
+    game = NoisyBird()
+    game.play()
 
-sd.Stream(callback=NoisyBird.process_sound).start()
-game = NoisyBird()
-game.main()
-pygame.quit()
-exit()
+if __name__ == '__main__':
+    main()
+

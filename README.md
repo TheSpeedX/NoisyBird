@@ -32,7 +32,7 @@ This a simple Flappy Bird Game made in Python (PyGame).
 The bird gets energy from your voice.
 Play the game and let your voice be heard.
 
-![NoisyBird](https://user-images.githubusercontent.com/42498830/161619840-9fe08fff-45a0-476a-807a-a2ff63a0015f.png)
+![NoisyBird](images/Introduction.png)
 
 
 ## ⚡️ HOW TO RUN
@@ -47,7 +47,6 @@ Run Game
 
 - Make UI Better(Background, Pipes).
 - A Game Start Screen.
-- Add A HighScore on Display.
 - Add A Bar On Game Screen To Show Current Sound Intensity.
 - Make The Game Harder as you progress.
 - Add an Feature To Callibrate Current Surrounding Sound.
