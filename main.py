@@ -55,15 +55,15 @@ class ScoreCard:
     def load_highscore(self):
         #load high score upon initializing game
         try:
-            with open('score/highscore.txt', 'r+') as f:
+            with open(os.path.join('score', 'highscore.txt'), 'r+') as f:
                 self.highscore = int(f.read())
         except:
-            with open('score/highscore.txt', 'w') as f:
+            with open(os.path.join('score', 'highscore.txt'), 'w') as f:
                 self.highscore = 0
 
     def save_highscore(self):
         #saves highscore to path file
-        with open('score/highscore.txt', 'w') as f:
+        with open(os.path.join('score', 'highscore.txt'), 'w') as f:
             f.write(str(self.highscore))
 
     def add_score(self, value):
@@ -73,14 +73,13 @@ class ScoreCard:
         self.score = 0
         
     def draw(self):
-        # TODO: Show High Score Aswell
+        #Shows Current and High scores
         text = self.font.render(f'Current Score: {self.score}', True, white)
         hstext = self.font.render(f'High Score: {self.highscore}', True, white)
         surface.blit(text, self.position)
         surface.blit(hstext, self.highscorepos)
 
     def update(self):
-        
         if self.score > self.highscore:
             self.highscore = self.score
             self.save_highscore()
