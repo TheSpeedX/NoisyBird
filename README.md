@@ -12,18 +12,16 @@ A Voice Controlled Flappy Bird
 <br />
 
 <div align="center">
-  <a href="https://standardjs.com">
-    <img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square"
-      alt="Standard" />
-  </a>
-  
+
   <img src="https://img.shields.io/github/languages/code-size/TheSpeedX/NoisyBird?style=flat-square" alt="Code size" />
 
   <img src="https://img.shields.io/github/license/TheSpeedX/NoisyBird?style=flat-square" alt="License" />
 
   <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/TheSpeedX/NoisyBird?style=flat-square">
 
-  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/TheSpeedX/NoisyBird?style=social">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/TheSpeedX/NoisyBird?style=flat-square">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/forks/TheSpeedX/NoisyBird?style=flat-square">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/issues/TheSpeedX/NoisyBird?style=flat-square">
 </div>
 
 ## ⚡️ Introduction
