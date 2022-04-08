@@ -20,8 +20,8 @@ A Voice Controlled Flappy Bird
   <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/TheSpeedX/NoisyBird?style=flat-square">
 
   <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/TheSpeedX/NoisyBird?style=flat-square">
-  <img alt="GitHub Repo stars" src="https://img.shields.io/github/forks/TheSpeedX/NoisyBird?style=flat-square">
-  <img alt="GitHub Repo stars" src="https://img.shields.io/github/issues/TheSpeedX/NoisyBird?style=flat-square">
+  <img alt="GitHub Repo forks" src="https://img.shields.io/github/forks/TheSpeedX/NoisyBird?style=flat-square">
+  <img alt="GitHub Repo issues" src="https://img.shields.io/github/issues/TheSpeedX/NoisyBird?style=flat-square">
 </div>
 
 ## ⚡️ Introduction
