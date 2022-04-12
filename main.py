@@ -1,3 +1,4 @@
+from tkinter.messagebox import NO
 import pygame
 import sounddevice as sd
 import numpy as np
@@ -205,6 +206,23 @@ class NoisyBird:
         self.game_over = False
         self.play()
 
+    def game_start_screen(self):
+        game_over_text = TextBlock('Start Screen', 70)
+        game_over_rect = game_over_text.text.get_rect()
+        game_over_rect.center = surfaceWidth / 2, (surfaceHeight / 2) - 50
+        continue_text = TextBlock('Press any key to continue', 20)
+        continue_rect = continue_text.text.get_rect()
+        continue_rect.center = surfaceWidth / 2, (surfaceHeight / 2) + 50
+        game_over_text.draw(game_over_rect)
+        continue_text.draw(continue_rect)
+        pygame.display.update()
+        time.sleep(1)
+
+        while self.replay_or_quit() is None:
+            clock.tick()
+        self.game_over = False
+        self.play()
+
     def gameOver(self):
         NoisyBird.bird.die_sound.play()
         self.game_over_screen()
@@ -262,6 +280,8 @@ class NoisyBird:
 def main():
     sd.Stream(callback=NoisyBird.process_sound).start()
     game = NoisyBird()
+    NoisyBird.reset_game()
+    game.game_start_screen()
     game.play()
 
 
