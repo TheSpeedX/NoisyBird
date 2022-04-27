@@ -1,4 +1,3 @@
-from tkinter.messagebox import NO
 import pygame
 import sounddevice as sd
 import numpy as np
@@ -189,39 +188,45 @@ class NoisyBird:
             return event.key
         return None
 
-    def game_over_screen(self):
-        game_over_text = TextBlock('GAME OVER', 70)
+    def game_show_screen(self, title, body):
+        game_over_text = TextBlock(title, 70)
         game_over_rect = game_over_text.text.get_rect()
-        game_over_rect.center = surfaceWidth / 2, (surfaceHeight / 2) - 50
-        continue_text = TextBlock('Press any key to continue', 20)
+        game_over_rect.center = surfaceWidth / 2, surfaceHeight / 2 - 50
+        continue_text = TextBlock(body, 20)
         continue_rect = continue_text.text.get_rect()
-        continue_rect.center = surfaceWidth / 2, (surfaceHeight / 2) + 50
+        continue_rect.center = surfaceWidth / 2, surfaceHeight / 2 + 50
         game_over_text.draw(game_over_rect)
         continue_text.draw(continue_rect)
         pygame.display.update()
         time.sleep(1)
-
         while self.replay_or_quit() is None:
             clock.tick()
         self.game_over = False
         self.play()
+
+    def game_over_screen(self):
+        self.game_show_screen('GAME OVER', 'Press any key to continue')
 
     def game_start_screen(self):
-        game_over_text = TextBlock('Start Screen', 70)
-        game_over_rect = game_over_text.text.get_rect()
-        game_over_rect.center = surfaceWidth / 2, (surfaceHeight / 2) - 50
-        continue_text = TextBlock('Press any key to continue', 20)
-        continue_rect = continue_text.text.get_rect()
-        continue_rect.center = surfaceWidth / 2, (surfaceHeight / 2) + 50
-        game_over_text.draw(game_over_rect)
-        continue_text.draw(continue_rect)
-        pygame.display.update()
-        time.sleep(1)
+        surface.fill(blue)
+        NoisyBird.bird = Bird(280, 100)
+        NoisyBird.bird.draw()
 
-        while self.replay_or_quit() is None:
-            clock.tick()
-        self.game_over = False
-        self.play()
+        pygame.draw.rect(
+            surface, green,
+            [
+                150, 320,
+                50, 500
+            ]
+        )
+        pygame.draw.rect(
+            surface, green,
+            [
+                600, 0,
+                50, 150
+            ]
+        )
+        self.game_show_screen('NOISYBIRD', 'Press any key to start game')
 
     def gameOver(self):
         NoisyBird.bird.die_sound.play()
@@ -280,7 +285,6 @@ class NoisyBird:
 def main():
     sd.Stream(callback=NoisyBird.process_sound).start()
     game = NoisyBird()
-    NoisyBird.reset_game()
     game.game_start_screen()
     game.play()
 
